@@ -27,7 +27,7 @@
       color: #fff;
     }
 
-    /* --- ฉากกดค้าง (Start Screen - พื้นหลังทึบ 100%) --- */
+    /* --- ฉากกดค้าง (Start Screen - Glassmorphic UI) --- */
     #start-screen {
       position: absolute;
       top: 0;
@@ -45,31 +45,34 @@
     }
 
     .instruction {
-      font-size: clamp(1.1rem, 4vw, 1.6rem);
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
       margin-bottom: 25px;
       color: #ffb6c1;
-      text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+      text-shadow: 0 0 20px rgba(255, 182, 193, 0.9), 0 0 40px rgba(255, 105, 180, 0.5);
       font-weight: 600;
       text-align: center;
+      letter-spacing: 1px;
     }
 
     .cake-hold-btn {
-      width: clamp(170px, 45vw, 220px);
-      height: clamp(170px, 45vw, 220px);
+      width: clamp(180px, 45vw, 230px);
+      height: clamp(180px, 45vw, 230px);
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(255, 182, 193, 0.3);
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 182, 193, 0.4);
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
       position: relative;
-      box-shadow: 0 0 40px rgba(255, 105, 180, 0.3);
-      transition: transform 0.2s ease;
+      box-shadow: 0 0 50px rgba(255, 105, 180, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
 
     .cake-hold-btn:active {
-      transform: scale(0.94);
+      transform: scale(0.93);
+      box-shadow: 0 0 70px rgba(255, 42, 117, 0.7);
     }
 
     .animated-cake {
@@ -100,7 +103,7 @@
 
     @keyframes flameFlicker {
       0% { transform: scale(1) rotate(-3deg); filter: drop-shadow(0 0 6px #ffeb3b); }
-      100% { transform: scale(1.15) rotate(3deg); filter: drop-shadow(0 0 14px #ff5722); }
+      100% { transform: scale(1.18) rotate(3deg); filter: drop-shadow(0 0 16px #ff5722); }
     }
 
     .progress-ring {
@@ -118,15 +121,16 @@
       stroke-dasharray: 690;
       stroke-dashoffset: 690;
       transition: stroke-dashoffset 0.1s linear;
-      filter: drop-shadow(0 0 10px #ff2a75);
+      filter: drop-shadow(0 0 12px #ff2a75);
     }
 
     .hold-hint {
       margin-top: 25px;
-      font-size: clamp(0.85rem, 3vw, 1rem);
-      color: rgba(255, 255, 255, 0.75);
+      font-size: clamp(0.9rem, 3vw, 1.05rem);
+      color: rgba(255, 255, 255, 0.85);
       animation: blink 1.5s infinite;
       text-align: center;
+      letter-spacing: 0.5px;
     }
 
     @keyframes blink {
@@ -161,19 +165,19 @@
     }
 
     .space-title {
-      font-size: clamp(1.6rem, 5.5vw, 2.6rem);
+      font-size: clamp(1.8rem, 6vw, 3rem);
       font-weight: 600;
       background: linear-gradient(45deg, #ff7eb3, #ff758c, #ffee55);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 25px rgba(255, 117, 140, 0.8);
+      text-shadow: 0 0 30px rgba(255, 117, 140, 0.9);
     }
 
     .space-sub {
-      font-size: clamp(0.9rem, 3vw, 1.2rem);
+      font-size: clamp(0.95rem, 3.2vw, 1.3rem);
       color: #ffd1dc;
-      margin-top: 4px;
-      text-shadow: 0 0 10px rgba(255, 209, 220, 0.6);
+      margin-top: 6px;
+      text-shadow: 0 0 12px rgba(255, 209, 220, 0.7);
       font-weight: 300;
     }
 
@@ -184,6 +188,41 @@
       pointer-events: none;
     }
 
+    /* --- 🎵 ปุ่มควบคุมเพลง (มุมขวาบน) --- */
+    #music-control {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 90;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 182, 193, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease, transform 0.2s ease;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+    }
+
+    #music-control.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #music-control:active {
+      transform: scale(0.9);
+    }
+
+    .music-icon {
+      font-size: 1.2rem;
+    }
+
     /* --- 🖼️ Modal Popup เมื่อคลิกที่รูปภาพ --- */
     #photo-modal {
       position: fixed;
@@ -192,7 +231,7 @@
       width: 100%;
       height: 100%;
       background: rgba(3, 1, 8, 0.85);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       z-index: 100;
       display: flex;
       justify-content: center;
@@ -208,9 +247,9 @@
     }
 
     .modal-card {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 182, 193, 0.3);
-      box-shadow: 0 0 50px rgba(255, 105, 180, 0.4);
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 182, 193, 0.4);
+      box-shadow: 0 0 60px rgba(255, 105, 180, 0.5);
       border-radius: 24px;
       padding: 24px;
       max-width: 90%;
@@ -230,7 +269,8 @@
       border-radius: 16px;
       overflow: hidden;
       margin-bottom: 16px;
-      border: 2px solid rgba(255, 105, 180, 0.5);
+      border: 2px solid rgba(255, 105, 180, 0.6);
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
     }
 
     .modal-img-wrapper img {
@@ -240,7 +280,7 @@
     }
 
     .modal-title {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: #ffb6c1;
       font-weight: 600;
       margin-bottom: 6px;
@@ -248,7 +288,7 @@
 
     .modal-caption {
       font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.9);
       margin-bottom: 20px;
       font-weight: 300;
     }
@@ -257,12 +297,12 @@
       background: linear-gradient(45deg, #ff2a75, #ff758c);
       border: none;
       color: white;
-      padding: 10px 24px;
+      padding: 10px 26px;
       border-radius: 30px;
       font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 0 15px rgba(255, 42, 117, 0.6);
+      box-shadow: 0 0 20px rgba(255, 42, 117, 0.7);
       transition: transform 0.2s ease;
     }
 
@@ -273,9 +313,17 @@
 </head>
 <body>
 
+  <!-- 🎵 แท็กเสียง background (วนลูป) -->
+  <audio id="bg-music" src="ขอบคุณที่เกิดมาให้รัก (found)  MEAN ft. JIXGO [Official Wedding Video] - MEAN Band Official.mp3" loop preload="auto"></audio>
+
+  <!-- 🎵 ปุ่มเปิด-ปิดเพลงมุมขวาบน -->
+  <div id="music-control">
+    <span class="music-icon" id="music-icon">🎵</span>
+  </div>
+
   <!-- ฉากกดค้าง -->
   <div id="start-screen">
-    <div class="instruction">✨ กดค้างที่เค้กกกก ✨</div>
+    <div class="instruction">✨ กดค้างที่เค้กกก ✨</div>
     
     <div class="cake-hold-btn" id="cakeBtn">
       <svg class="animated-cake" viewBox="0 0 200 200">
@@ -339,8 +387,8 @@
     /* 📌 รายชื่อรูปและข้อความการ์ดในป๊อปอัพ */
     const girlfriendPhotos = [
       { src: '01.jpg', title: 'Amor de mi Vida 💖', caption: 'ข้างๆหนูจะมีพี่เสมอ' },
-      { src: '08.jpg', title: 'Para Ti 💕', caption: 'ขอบคุณที่เป็นความสุขในทุกๆ วันของพี่นะ' },
-      { src: '03.jpg', title: 'Eres Magia ✨', caption: 'หนูคือเรื่องราวที่ดีที่สุดของพี่' },
+      { src: '02.jpg', title: 'Para Ti 💕', caption: 'ขอบคุณที่เป็นความสุขในทุกๆ วันของพี่นะ' },
+      { src: '08.jpg', title: 'Eres Magia ✨', caption: 'หนูคือเรื่องราวที่ดีที่สุดของพี่' },
       { src: '04.jpg', title: 'Mi Amor Eterno 😍', caption: 'รักเธอมากขึ้นในทุกๆ วัน' },
       { src: '05.jpg', title: 'Happy Birthday 🎂', caption: 'มีความสุขมากๆ สุขภาพแข็งแรงนะคนเก่ง' },
       { src: '09.jpg', title: 'My Special Universe 🌌', caption: 'อยู่จับมือกันไปนานๆ ทุกๆ ปีเลยนะ' },
@@ -357,13 +405,15 @@
       "Yu Duay Kan Pai Nan2 Na 😍"
     ];
 
-    /* --- 1. ระบบกดค้าง --- */
+    /* --- 1. ระบบกดค้างและระบบเพลง --- */
     const cakeBtn = document.getElementById('cakeBtn');
     const circle = document.querySelector('.progress-ring__circle');
     const startScreen = document.getElementById('start-screen');
     const spaceText = document.getElementById('spaceText');
+    const bgMusic = document.getElementById('bg-music');
+    const musicControl = document.getElementById('music-control');
+    const musicIcon = document.getElementById('music-icon');
     
-    // ✨ แก้ไขไวยากรณ์คำนวณวงกลมหลอดโหลด
     const circumference = 2 * Math.PI * 102;
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
     circle.style.strokeDashoffset = circumference;
@@ -374,11 +424,38 @@
 
     let isHyperWarping = false;
     let warpZoomProgress = 0;
+    let isMusicPlaying = false;
 
     function setProgress(percent) {
       const offset = circumference - (percent / 100 * circumference);
       circle.style.strokeDashoffset = offset;
     }
+
+    function playMusic() {
+    // 📌 ระบุเวลาท่อนเพลงที่ต้องการเริ่มตรงนี้ (คิดเป็นจำนวนวินาที)
+    // ตัวอย่าง: ถ้าต้องการเริ่มที่ นาที 1:15 ให้ออกคำนวณเป็น 60 + 15 = 75 วินาที
+    bgMusic.currentTime = 82; 
+
+    bgMusic.play().then(() => {
+      isMusicPlaying = true;
+      musicIcon.innerText = '🎵';
+    }).catch(() => {
+      isMusicPlaying = false;
+      musicIcon.innerText = '🔇';
+    });
+  }
+
+    musicControl.addEventListener('click', () => {
+      if (isMusicPlaying) {
+        bgMusic.pause();
+        isMusicPlaying = false;
+        musicIcon.innerText = '🔇';
+      } else {
+        bgMusic.play();
+        isMusicPlaying = true;
+        musicIcon.innerText = '🎵';
+      }
+    });
 
     function startHold() {
       holdProgress = 0;
@@ -411,9 +488,13 @@
       startScreen.classList.add('hyper-warp-active');
       initThreeJS();
       isHyperWarping = true;
+      
+      // ✨ เริ่มเล่นเพลงเมื่อกดค้างครบ
+      playMusic();
 
       setTimeout(() => {
         spaceText.style.opacity = '1';
+        musicControl.classList.add('active'); // แสดงปุ่มคุมเพลงมุมขวาบน
       }, 800);
     }
 
@@ -444,7 +525,7 @@
 
       const container = document.getElementById('webgl-container');
       const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x030108, 0.005);
+      scene.fog = new THREE.FogExp2(0x030108, 0.004);
 
       const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
       
@@ -467,18 +548,149 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.15; 
+      renderer.toneMappingExposure = 1.2; 
       container.appendChild(renderer.domElement);
 
-      /* --- 🖱️ ระบบลากเมาส์ และคลิกที่รูปภาพ 3D --- */
+      // แสง
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+      scene.add(ambientLight);
+
+      const centerLight = new THREE.PointLight(0xff0066, 4.0, 70);
+      centerLight.position.set(0, 4, 0);
+      scene.add(centerLight);
+
+      const topLight = new THREE.DirectionalLight(0xffffff, 1.0);
+      topLight.position.set(5, 20, 5);
+      scene.add(topLight);
+
+      const mainGroup = new THREE.Group();
+      scene.add(mainGroup);
+
+      /* --- 🎂 1. เค้ก 3D ตรงกลาง --- */
+      const cakeGroup = new THREE.Group();
+
+      const plateGeo = new THREE.CylinderGeometry(5.2, 5.2, 0.3, 64);
+      const plateMat = new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.85, roughness: 0.15 });
+      const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.position.y = -0.15;
+      cakeGroup.add(plate);
+
+      const botCakeGeo = new THREE.CylinderGeometry(4.2, 4.2, 2.2, 64);
+      const botCakeMat = new THREE.MeshStandardMaterial({ color: 0xff85a2, roughness: 0.25 });
+      const botCake = new THREE.Mesh(botCakeGeo, botCakeMat);
+      botCake.position.y = 1.1;
+      cakeGroup.add(botCake);
+
+      const topCakeGeo = new THREE.CylinderGeometry(2.8, 2.8, 1.8, 64);
+      const topCakeMat = new THREE.MeshStandardMaterial({ color: 0xfff0f5, roughness: 0.2 });
+      const topCake = new THREE.Mesh(topCakeGeo, topCakeMat);
+      topCake.position.y = 3.1;
+      cakeGroup.add(topCake);
+
+      for (let i = 0; i < 8; i++) {
+        const angle = (i / 8) * Math.PI * 2;
+        const berryGeo = new THREE.SphereGeometry(0.35, 16, 16);
+        berryGeo.scale(1, 1.3, 1);
+        const berryMat = new THREE.MeshStandardMaterial({ color: 0xff1a40, roughness: 0.2 });
+        const berry = new THREE.Mesh(berryGeo, berryMat);
+        berry.position.set(Math.cos(angle) * 2.1, 4.1, Math.sin(angle) * 2.1);
+        cakeGroup.add(berry);
+      }
+
+      const candleGeo = new THREE.CylinderGeometry(0.18, 0.18, 1.4, 32);
+      const candleMat = new THREE.MeshStandardMaterial({ color: 0xff3366 });
+      const candle = new THREE.Mesh(candleGeo, candleMat);
+      candle.position.y = 4.7;
+      cakeGroup.add(candle);
+
+      const flameGeo = new THREE.SphereGeometry(0.4, 16, 16);
+      flameGeo.scale(0.8, 1.5, 0.8);
+      const flameMat = new THREE.MeshBasicMaterial({ color: 0xffea00 });
+      const flame = new THREE.Mesh(flameGeo, flameMat);
+      flame.position.y = 5.6;
+      cakeGroup.add(flame);
+
+      mainGroup.add(cakeGroup);
+
+      /* --- 🎆 ระบบพลุดอกไม้ไฟ --- */
+      const activeFireworks = [];
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 32; canvas.height = 32;
+      const ctx = canvas.getContext('2d');
+      const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+      grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      grad.addColorStop(0.4, 'rgba(255, 182, 193, 0.8)');
+      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 32, 32);
+      const pTexture = new THREE.CanvasTexture(canvas);
+
+      function createFirework(originPos) {
+        const particleCount = 220;
+        const fireworkGeo = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = [];
+        const colors = new Float32Array(particleCount * 3);
+
+        const fwColors = [
+          new THREE.Color('#ff0066'), 
+          new THREE.Color('#ff758c'), 
+          new THREE.Color('#ffee55'), 
+          new THREE.Color('#ff2a75'), 
+          new THREE.Color('#ffffff')
+        ];
+
+        for (let i = 0; i < particleCount; i++) {
+          positions[i * 3] = originPos.x;
+          positions[i * 3 + 1] = originPos.y;
+          positions[i * 3 + 2] = originPos.z;
+
+          const theta = Math.random() * Math.PI * 2;
+          const phi = Math.acos((Math.random() * 2) - 1);
+          const speed = 0.35 + Math.random() * 0.55;
+
+          velocities.push(new THREE.Vector3(
+            speed * Math.sin(phi) * Math.cos(theta),
+            speed * Math.cos(phi) + 0.12,
+            speed * Math.sin(phi) * Math.sin(theta)
+          ));
+
+          const c = fwColors[Math.floor(Math.random() * fwColors.length)];
+          colors[i * 3] = c.r;
+          colors[i * 3 + 1] = c.g;
+          colors[i * 3 + 2] = c.b;
+        }
+
+        fireworkGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        fireworkGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const fireworkMat = new THREE.PointsMaterial({
+          size: 0.85,
+          vertexColors: true,
+          map: pTexture,
+          transparent: true,
+          opacity: 1.0,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        });
+
+        const fireworkPoints = new THREE.Points(fireworkGeo, fireworkMat);
+        mainGroup.add(fireworkPoints);
+
+        activeFireworks.push({
+          mesh: fireworkPoints,
+          velocities: velocities,
+          life: 1.0
+        });
+      }
+
+      /* --- 🖱️ ระบบลากเมาส์ / คลิกรูปภาพ / คลิกจุดพลุเค้ก --- */
       let isDragging = false;
       let pointerDownPos = { x: 0, y: 0 };
       let previousMousePosition = { x: 0, y: 0 };
       let cameraAngleX = 0;
       let cameraAngleY = 0;
-
-      const mainGroup = new THREE.Group();
-      scene.add(mainGroup);
 
       const raycaster = new THREE.Raycaster();
       const mouse = new THREE.Vector2();
@@ -519,10 +731,19 @@
           mouse.y = -(clientY / window.innerHeight) * 2 + 1;
 
           raycaster.setFromCamera(mouse, camera);
-          const intersects = raycaster.intersectObjects(clickablePhotos, true);
 
-          if (intersects.length > 0) {
-            let hitObj = intersects[0].object;
+          // 1. ตรวจการคลิกเค้กจุดพลุ 🎆
+          const cakeIntersects = raycaster.intersectObjects(cakeGroup.children, true);
+          if (cakeIntersects.length > 0) {
+            createFirework(new THREE.Vector3(0, 5.5, 0));
+            createFirework(new THREE.Vector3((Math.random()-0.5)*5, 7+(Math.random()*3), (Math.random()-0.5)*5));
+            return;
+          }
+
+          // 2. ตรวจการคลิกรูปภาพ 🖼️
+          const photoIntersects = raycaster.intersectObjects(clickablePhotos, true);
+          if (photoIntersects.length > 0) {
+            let hitObj = photoIntersects[0].object;
             while (hitObj.parent && !hitObj.userData.photoData) {
               hitObj = hitObj.parent;
             }
@@ -542,78 +763,8 @@
       window.addEventListener('touchmove', onPointerMove, { passive: true });
       window.addEventListener('touchend', onPointerUp);
 
-      // แสง
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
-      scene.add(ambientLight);
-
-      const centerLight = new THREE.PointLight(0xff0066, 3.5, 60);
-      centerLight.position.set(0, 4, 0);
-      scene.add(centerLight);
-
-      const topLight = new THREE.DirectionalLight(0xffffff, 0.9);
-      topLight.position.set(5, 20, 5);
-      scene.add(topLight);
-
-      /* --- 🎂 1. เค้ก 3D สมจริงตรงกลางฉาก --- */
-      const cakeGroup = new THREE.Group();
-
-      const plateGeo = new THREE.CylinderGeometry(5.2, 5.2, 0.3, 64);
-      const plateMat = new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.8, roughness: 0.2 });
-      const plate = new THREE.Mesh(plateGeo, plateMat);
-      plate.position.y = -0.15;
-      cakeGroup.add(plate);
-
-      const botCakeGeo = new THREE.CylinderGeometry(4.2, 4.2, 2.2, 64);
-      const botCakeMat = new THREE.MeshStandardMaterial({ color: 0xff85a2, roughness: 0.3 });
-      const botCake = new THREE.Mesh(botCakeGeo, botCakeMat);
-      botCake.position.y = 1.1;
-      cakeGroup.add(botCake);
-
-      const topCakeGeo = new THREE.CylinderGeometry(2.8, 2.8, 1.8, 64);
-      const topCakeMat = new THREE.MeshStandardMaterial({ color: 0xfff0f5, roughness: 0.2 });
-      const topCake = new THREE.Mesh(topCakeGeo, topCakeMat);
-      topCake.position.y = 3.1;
-      cakeGroup.add(topCake);
-
-      for (let i = 0; i < 8; i++) {
-        const angle = (i / 8) * Math.PI * 2;
-        const berryGeo = new THREE.SphereGeometry(0.35, 16, 16);
-        berryGeo.scale(1, 1.3, 1);
-        const berryMat = new THREE.MeshStandardMaterial({ color: 0xff1a40, roughness: 0.2 });
-        const berry = new THREE.Mesh(berryGeo, berryMat);
-        berry.position.set(Math.cos(angle) * 2.1, 4.1, Math.sin(angle) * 2.1);
-        cakeGroup.add(berry);
-      }
-
-      const candleGeo = new THREE.CylinderGeometry(0.18, 0.18, 1.4, 32);
-      const candleMat = new THREE.MeshStandardMaterial({ color: 0xff3366 });
-      const candle = new THREE.Mesh(candleGeo, candleMat);
-      candle.position.y = 4.7;
-      cakeGroup.add(candle);
-
-      const flameGeo = new THREE.SphereGeometry(0.4, 16, 16);
-      flameGeo.scale(0.8, 1.5, 0.8);
-      const flameMat = new THREE.MeshBasicMaterial({ color: 0xffea00 });
-      const flame = new THREE.Mesh(flameGeo, flameMat);
-      flame.position.y = 5.6;
-      cakeGroup.add(flame);
-
-      mainGroup.add(cakeGroup);
-
-      /* --- ✨ 2. ละอองฟุ้งและจานกาแล็กซี --- */
-      const canvas = document.createElement('canvas');
-      canvas.width = 32; canvas.height = 32;
-      const ctx = canvas.getContext('2d');
-      const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
-      grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      grad.addColorStop(0.4, 'rgba(255, 182, 193, 0.7)');
-      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 32, 32);
-      const pTexture = new THREE.CanvasTexture(canvas);
-
-      // ละอองเนบิวลาลอยฟุ้ง
-      const dustCount = 5000;
+      /* --- ✨ ละอองเนบิวลาและกาแล็กซี --- */
+      const dustCount = 6000;
       const dustGeo = new THREE.BufferGeometry();
       const dustPos = new Float32Array(dustCount * 3);
       const dustColors = new Float32Array(dustCount * 3);
@@ -621,9 +772,9 @@
       const dColors = [new THREE.Color('#ff0066'), new THREE.Color('#ff66cc'), new THREE.Color('#a855f7'), new THREE.Color('#38bdf8'), new THREE.Color('#ffffff')];
 
       for (let i = 0; i < dustCount; i++) {
-        dustPos[i * 3] = (Math.random() - 0.5) * 75;
-        dustPos[i * 3 + 1] = (Math.random() - 0.5) * 50;
-        dustPos[i * 3 + 2] = (Math.random() - 0.5) * 75;
+        dustPos[i * 3] = (Math.random() - 0.5) * 80;
+        dustPos[i * 3 + 1] = (Math.random() - 0.5) * 55;
+        dustPos[i * 3 + 2] = (Math.random() - 0.5) * 80;
 
         const c = dColors[Math.floor(Math.random() * dColors.length)];
         dustColors[i * 3] = c.r;
@@ -635,7 +786,7 @@
       dustGeo.setAttribute('color', new THREE.BufferAttribute(dustColors, 3));
 
       const dustMat = new THREE.PointsMaterial({
-        size: 0.75,
+        size: 0.8,
         vertexColors: true,
         map: pTexture,
         transparent: true,
@@ -647,8 +798,8 @@
       const cosmicDust = new THREE.Points(dustGeo, dustMat);
       mainGroup.add(cosmicDust);
 
-      // จานกาแล็กซี 18,000 ดวง
-      const galaxyParticleCount = 18000;
+      // จานกาแล็กซี 20,000 ดวง
+      const galaxyParticleCount = 20000;
       const galaxyGeo = new THREE.BufferGeometry();
       const galaxyPos = new Float32Array(galaxyParticleCount * 3);
       const galaxyColors = new Float32Array(galaxyParticleCount * 3);
@@ -656,7 +807,7 @@
       const gColors = [new THREE.Color('#ff0066'), new THREE.Color('#ff3399'), new THREE.Color('#ff66cc'), new THREE.Color('#ffffff')];
 
       for (let i = 0; i < galaxyParticleCount; i++) {
-        const radius = Math.pow(Math.random(), 1.5) * 34 + 2.5;
+        const radius = Math.pow(Math.random(), 1.5) * 35 + 2.5;
         const spinAngle = radius * 0.4;
         const branchAngle = ((i % 4) * Math.PI * 2) / 4;
 
@@ -682,7 +833,7 @@
       galaxyGeo.setAttribute('color', new THREE.BufferAttribute(galaxyColors, 3));
 
       const galaxyMat = new THREE.PointsMaterial({
-        size: 0.42,
+        size: 0.45,
         vertexColors: true,
         map: pTexture,
         transparent: true,
@@ -694,23 +845,23 @@
       galaxy.rotation.x = 0.25; 
       mainGroup.add(galaxy);
 
-      /* --- 3. ข้อความหมุนวงแหวน (อิสระ ไม่ตรงกับรูปภาพ) --- */
+      /* --- 3. ข้อความหมุนวงแหวนวงนอก (ขนาดใหญ่เด่นชัด) --- */
       const textGroup = new THREE.Group();
 
       function createTextTexture(text) {
         const textCanvas = document.createElement('canvas');
-        textCanvas.width = 1024;
-        textCanvas.height = 256;
+        textCanvas.width = 1280;
+        textCanvas.height = 320;
         const tCtx = textCanvas.getContext('2d');
         
         tCtx.fillStyle = 'transparent';
-        tCtx.fillRect(0, 0, 1024, 256);
+        tCtx.fillRect(0, 0, 1280, 320);
 
-        let fontSize = 56;
+        let fontSize = 84; 
         if (text.length > 20) {
-          fontSize = 38;
+          fontSize = 58;
         } else if (text.length > 12) {
-          fontSize = 46;
+          fontSize = 70;
         }
 
         tCtx.font = `Bold ${fontSize}px "Prompt", sans-serif`;
@@ -718,9 +869,9 @@
         tCtx.textBaseline = 'middle';
         
         tCtx.shadowColor = '#ff0066';
-        tCtx.shadowBlur = 18;
+        tCtx.shadowBlur = 24;
         tCtx.fillStyle = '#ffffff';
-        tCtx.fillText(text, 512, 128);
+        tCtx.fillText(text, 640, 160);
 
         const texture = new THREE.CanvasTexture(textCanvas);
         texture.encoding = THREE.sRGBEncoding;
@@ -736,26 +887,23 @@
           depthWrite: false
         });
         
-        const txtGeo = new THREE.PlaneGeometry(10, 2.5);
+        const txtGeo = new THREE.PlaneGeometry(14, 3.5);
         const txtMesh = new THREE.Mesh(txtGeo, txtMat);
 
-        // ✨ 1. เบี่ยงมุมเริ่มต้น 45 องศา (+ Math.PI / 4) เพื่อไม่ให้ตรงกับรูปภาพ
         const baseAngle = (index / textList.length) * Math.PI * 2 + Math.PI / 4;
-        // ✨ 2. ขยายรัศมีให้อยู่วงนอก (19 - 23) ไกลกว่าวงแหวนรูปภาพ (รัศมี 14)
-        const radius = 19 + (index % 2) * 4;
+        const radius = 20 + (index % 2) * 4;
         
-        // ✨ 3. กำหนดความสูงและจังหวะหมุนอิสระ
         txtMesh.userData = { 
           baseAngle: baseAngle, 
           radius: radius, 
-          heightY: 4.5 + (index % 3) * 2.0, 
+          heightY: 5.0 + (index % 3) * 2.2, 
           speed: 0.0016 
         };
         textGroup.add(txtMesh);
       });
       mainGroup.add(textGroup);
 
-      /* --- 4. โหลดรูปภาพ 3D (ลอยเด่น วงใน) --- */
+      /* --- 4. โหลดรูปภาพ 3D --- */
       const photoGroup = new THREE.Group();
       const clickablePhotos = [];
       const photoGeo = new THREE.CircleGeometry(1.6, 32);
@@ -844,7 +992,7 @@
         const galaxyRotSpeed = time * 0.03;
         galaxy.rotation.y = galaxyRotSpeed;
 
-        // 📸 2. รูปภาพลอยหมุนตามกาแล็กซีอยู่วงใน (รัศมี 14)
+        // 📸 2. รูปภาพหมุนอยู่วงใน (รัศมี 14)
         photoGroup.children.forEach(p => {
           const currentAngle = p.userData.baseAngle + galaxyRotSpeed;
           p.position.x = Math.cos(currentAngle) * p.userData.dist;
@@ -853,7 +1001,7 @@
           p.lookAt(camera.position);
         });
 
-        // 💬 3. ข้อความหมุนอยู่วงนอก (รัศมี 19-23) หมุนเป็นอิสระ ไม่บังรูปภาพ
+        // 💬 3. ข้อความหมุนอยู่วงนอก (รัศมี 20-24)
         textGroup.children.forEach(mesh => {
           mesh.userData.baseAngle += mesh.userData.speed;
           mesh.position.x = Math.cos(mesh.userData.baseAngle) * mesh.userData.radius;
@@ -861,6 +1009,28 @@
           mesh.position.y = mesh.userData.heightY;
           mesh.lookAt(camera.position);
         });
+
+        // 🎆 4. อนิเมชันพลุดอกไม้ไฟ
+        for (let i = activeFireworks.length - 1; i >= 0; i--) {
+          const fw = activeFireworks[i];
+          fw.life -= 0.015;
+          fw.mesh.material.opacity = fw.life;
+
+          const posArr = fw.mesh.geometry.attributes.position.array;
+          for (let j = 0; j < fw.velocities.length; j++) {
+            posArr[j * 3] += fw.velocities[j].x;
+            posArr[j * 3 + 1] += fw.velocities[j].y;
+            posArr[j * 3 + 2] += fw.velocities[j].z;
+
+            fw.velocities[j].y -= 0.008;
+          }
+          fw.mesh.geometry.attributes.position.needsUpdate = true;
+
+          if (fw.life <= 0) {
+            mainGroup.remove(fw.mesh);
+            activeFireworks.splice(i, 1);
+          }
+        }
 
         // ละอองดาวฟุ้งหมุนพริ้วๆ เบาๆ
         cosmicDust.rotation.y = time * 0.008;
